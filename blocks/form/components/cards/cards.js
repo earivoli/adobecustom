@@ -14,9 +14,6 @@ function createCard(element, enums) {
       label.textContent = enums[index]?.name;
     }
 
-    // Attach index to input element for later reference
-    radioWrapper.querySelector('input').dataset.index = index;
-
     const image = createOptimizedPicture(
       enums[index]?.image || 'https://main--adobecustom--earivoli.aem.page/icons/cc.svg',
       'card-image'
@@ -39,12 +36,6 @@ export default function decorate(element, fieldJson, container, formId) {
           createCard(element, change.currentValue);
         }
       });
-    });
-
-    element.addEventListener('change', (e) => {
-      e.stopPropagation();
-      const value = fieldModel.enum?.[parseInt(e.target.dataset.index, 10)];
-      fieldModel.value = value.name;
     });
   });
 
